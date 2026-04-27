@@ -3,8 +3,7 @@
 
 ## User/Assitant Model
 
-<p>When communicating with with AI, it's important to follow a User/Assistant conversational model. You must assume you are in conversation with the AI and generate requests and responses in order<br>
-to use the AI effectively.</p>
+<p>When communicating with with AI, it's important to follow a User/Assistant conversational model. You must assume you are in conversation with the AI and generate requests and responses in order to use the AI effectively.</p>
 
 **Example**
 
