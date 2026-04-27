@@ -7,7 +7,7 @@
 
 **Example**
 
-<p>*User*: Give me one of Shakespeare's most popular lines.<br>
+<p> *User*: Give me one of Shakespeare's most popular lines.<br>
 *Assistant*: To be or not to be, that is the question. (Hamlet)</p>
 
 <p>Submitting two messages in a row before receiving a response may result in an error, as the AI doesn't know which request to respond to. There are additional formatting rules that incentivize this structure.</p>
@@ -20,8 +20,8 @@
 
 **Example**
 
-<p>*User*: <system prompt> Respond to requests with a one-word, definitive answer. </system prompt>
-*User*: Is Pluto a planet in the solar system?
+<p> *User*: <system prompt> Respond to requests with a one-word, definitive answer. </system prompt> <br>
+*User*: Is Pluto a planet in the solar system? <br>
 *Assistant*: No.</p>
 
 ## Be Clear and Direct with Instructions
@@ -38,5 +38,5 @@
 
 **Example**
 
-<p>*User*: Assume you are an IT support specialist for a large telecoms company. Assume you are speaking to an elderly person with relatively little knowledge of how your website, or websites in general, work. How do I request a technician to come to my house?
+<p> *User*: Assume you are an IT support specialist for a large telecoms company. Assume you are speaking to an elderly person with relatively little knowledge of how your website, or websites in general, work. How do I request a technician to come to my house?<br>
 *Assistant*: You can use our website to book a technician from your computer, but I know that can be difficult if you're unfamiliar with the website's layout. Instead, I recommend calling us at the following phone number so we can walk you through the booking process step-by-step: (phone number) </p>
