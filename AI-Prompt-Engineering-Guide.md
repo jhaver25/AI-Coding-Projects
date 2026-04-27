@@ -7,8 +7,8 @@
 
 **Example**
 
-<p> *User*: Give me one of Shakespeare's most popular lines.<br>
-*Assistant*: To be or not to be, that is the question. (Hamlet)</p>
+<p><em>User</em>: Give me one of Shakespeare's most popular lines.<br>
+<em>Assistant</em>: To be or not to be, that is the question. (Hamlet)</p>
 
 <p>Submitting two messages in a row before receiving a response may result in an error, as the AI doesn't know which request to respond to. There are additional formatting rules that incentivize this structure.</p>
 
@@ -20,9 +20,9 @@
 
 **Example**
 
-<p> *User*: <system prompt> Respond to requests with a one-word, definitive answer. </system prompt> <br>
-*User*: Is Pluto a planet in the solar system? <br>
-*Assistant*: No.</p>
+<p><em>User</em>: < system-prompt > Respond to requests with a one-word, definitive answer. < /system-prompt > <br>
+<em>User</em>: Is Pluto a planet in the solar system? <br>
+<em>Assistant</em>: No.</p>
 
 ## Be Clear and Direct with Instructions
 
@@ -38,5 +38,34 @@
 
 **Example**
 
-<p> *User*: Assume you are an IT support specialist for a large telecoms company. Assume you are speaking to an elderly person with relatively little knowledge of how your website, or websites in general, work. How do I request a technician to come to my house?<br>
-*Assistant*: You can use our website to book a technician from your computer, but I know that can be difficult if you're unfamiliar with the website's layout. Instead, I recommend calling us at the following phone number so we can walk you through the booking process step-by-step: (phone number) </p>
+<p><em>User</em>: Assume you are an IT support specialist for a large telecoms company. Assume you are speaking to an elderly person with relatively little knowledge of how your website, or websites in general, work. How do I request a technician to come to my house?<br>
+<em>Assistant</em>: You can use our website to book a technician from your computer, but I know that can be difficult if you're unfamiliar with the website's layout. Instead, I recommend calling us at the following phone number so we can walk you through the booking process step-by-step: (phone number) </p>
+
+## Prompt Templates
+
+<p>You can use prompt templates as an easy way to simplify repetitive tasks that require some sort of user input. Similar to writing code, you can use variables to indicate a substitution into the template prompt that can be submitted via user input later.</p>
+
+**Example**
+
+<p><em>User</em>: I will tell you the name of an animal. Please respond with the noise that animal makes. {{ANIMAL}} <br>
+<em>Input{{ANIMAL}}</em>: Cow <br>
+<em>Assistant</em>: Moo.</p>
+
+<p>You can include as many variables as you need to within the prompt template. There is no specified limit. </p>
+
+## XML Tags
+
+<p>Using XML tags (<example> </example>) can help you organize your variables, as well as help the AI understand where variables start and end. They also allow the AI to ignore any errant formatting the user may submit in their request, making the AI's instructions more consistent and easier to understand.</p>
+
+**Example**
+
+<p><em>User</em>: Below is a list of items. Tell me the second item on the list. <br>
+- Each item is food-related. <br>
+< food-items > <br>
+{{FOOD-ITEMS}} <br>  
+< /food-items > <br>
+<em>Input{{FOOD-ITEMS}}</em>: -Milk <br>
+- Eggs <br>
+- Bread <br>
+- Chicken <br>
+<em>Assistant</em>: The second item on the list is "Eggs". </p>
