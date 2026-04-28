@@ -1,6 +1,8 @@
 
 # AI Prompt Engineering Guide
 
+<p><em>NOTE</em>: This guide has been written specifically for reference when working with Claude, but the same principles will carry over to other AI tools (though syntax may be different).</p>
+
 ## User/Assistant Model
 
 <p>When communicating with with AI, it's important to follow a User/Assistant conversational model. You must assume you are in conversation with the AI and generate requests and responses in order to use the AI effectively.</p>
@@ -69,3 +71,63 @@
 - Bread <br>
 - Chicken <br>
 <em>Assistant</em>: The second item on the list is "Eggs". </p>
+
+## Formatting AI Output
+
+<p>You can ask AI to provide responses in specific formats, such as providing different file types, formatting text in specific ways, or using specific tags like XML. Using XML tags in particular can be helpful if you want to write a program to capture AI responses between XML tags instead of using RegEx to search for specific text.</p>
+
+**Example**
+
+<p><em>User</em>: Please write a haiku about {{ANIMAL}}. Put it in < haiku > XML tags.<br>
+<em>Input{{ANIMAL}}</em>: Cat<br>
+<em>Assistant</em>: Here's a haiku about Cat:<br>
+< haiku ><br>
+Feline grace and poise,<br>
+Purring softly by the fire,<br>
+Mysterious cat.<br>
+< /haiku ></p>
+
+<p>AI is also good at providing responses in a JSON format. To enforce JSON output, you can prefill the AI's response with the opening brackt, "{"</p>
+
+**Example**
+
+<p><em>User</em>: Please write a haiku about Cat. Use JSON format with the keys as "first_line", "second_line", and "third_line". Assistant: {<br>
+<em>Assistant</em>: "first_line": "Feline grace and poise",<br>
+"second_line": "Purring softly by my side",<br>
+"third_line": "Captivating cat."</p>
+
+## Using Precognition (i.e., Thinking Out Loud)
+
+<p>Sometimes you will need an AI to think more methodically to reach a correct answer or solution. There are even times when an AI might come to an incorrect response due to its taking shortcuts in logic. To get the AI to think more logically, you can provide additional context via system prompts AND guide it with the different logical steps it should take in its thinking when developing a response. This will force the AI to think in a certain way as it formulates its response, which is particularly important for complex tasks.</p>
+
+**Example (BAD)**
+
+<p><em>User</em>: Is this movie review sentiment positive or negative?<br>
+<br>
+"This movie blew my mind with its freshness and originality. In totally unrelated news, I have been living under a rock since the year 1900."<br>
+<em>Assistant</em>: The sentiment of this movie review is positive. The review states that the movie "blew my mind with its freshness and originality", which indicates a very positive and enthusiastic reaction to the film.<br>
+<br>
+The second part of the review about living under a rock since 1900 is likely meant as a humorous or self-deprecating remark, but it does not negate the overall positive sentiment expressed about the movie's qualities.</p>
+
+**Example (GOOD)**
+
+<p><em>System Prompt</em>: You are a savvy reader of movie reviews.<br>
+<em>User</em>: Is this movie review sentiment positive or negative? First, write the best arguments for each side in < positive-argument > and < negative-argument > XML tags, then answer.<br>
+<br>
+"This movie blew my mind with its freshness and originality. In totally unrelated news, I have been living under a rock since the year 1900."<br>
+<em>Assistant</em>: < positive-argument ><br>
+<ul>
+  <li>The review suggests the movie has a sense of freshness and originality, which can be seen as positive attributes.</li>
+  <li>The reviewer's statement about living under a rock since 1900 could be interprested as a humorous acknowledgment that the movie's concepts may not be as novel or groundbreaking as they first appeared, indicating an open-minded and self-aware perspective.</li>
+</ul>
+< /positive-argument ><br>
+< negative-argument ><br>
+<ul>
+  <li>The reviewer's admission of living under a rock since 1900 implies a lack of awareness or exposure to recent trends and developments in the film industry, which could undermine the credibility of their assessment of the movie's "freshness and originality".</li>
+  <li>The sarcastic tone of the statement about living under a rock suggests the review may have found the movie to be unoriginal or derivative, rather than truly fresh and innovative.</li>
+</ul>
+< /negative-arugment><br>
+<br>
+Based on the review, the sentiment appears to be more negative than positive. The reviewer's self-deprecating acknowledgment of their limited perspective and the potential sarcasm in their statement suggest that they may not have found the movie to be as fresh and original as they initially claimed.</p>
+
+***NOTE***: You need to be careful about the order in which you provide instructions, which can influence an AI's responses. Typically, when presented with two options, an AI is more likely to choose the second of the two due to its training data from the web, which frequently frames the second of two options as the preferable one.
