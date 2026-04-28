@@ -9,9 +9,9 @@
 
 **Example**
 
-><em>User</em>: Give me one of Shakespeare's most popular lines.
+> <em>User</em>: Give me one of Shakespeare's most popular lines.
 >
-><em>Assistant</em>: To be or not to be, that is the question. (Hamlet)
+> <em>Assistant</em>: To be or not to be, that is the question. (Hamlet)
 
 <p>Submitting two messages in a row before receiving a response may result in an error, as the AI doesn't know which request to respond to. There are additional formatting rules that incentivize this structure.</p>
 
@@ -23,11 +23,11 @@
 
 **Example**
 
-><em>System Prompt</em>: Respond to requests with a one-word, definitive answer.
+> <em>System Prompt</em>: Respond to requests with a one-word, definitive answer.
 >
-><em>User</em>: Is Pluto a planet in the solar system?
+> <em>User</em>: Is Pluto a planet in the solar system?
 >
-><em>Assistant</em>: No.
+> <em>Assistant</em>: No.
 
 ## Be Clear and Direct with Instructions
 
@@ -43,9 +43,9 @@
 
 **Example**
 
-><em>User</em>: Assume you are an IT support specialist for a large telecoms company. Assume you are speaking to an elderly person with relatively little knowledge of how your website, or websites in general, work. How do I request a technician to come to my house?
+> <em>User</em>: Assume you are an IT support specialist for a large telecoms company. Assume you are speaking to an elderly person with relatively little knowledge of how your website, or websites in general, work. How do I request a technician to come to my house?
 >
-><em>Assistant</em>: You can use our website to book a technician from your computer, but I know that can be difficult if you're unfamiliar with the website's layout. Instead, I recommend calling us at the following phone number so we can walk you through the booking process step-by-step: (phone number)
+> <em>Assistant</em>: You can use our website to book a technician from your computer, but I know that can be difficult if you're unfamiliar with the website's layout. Instead, I recommend calling us at the following phone number so we can walk you through the booking process step-by-step: (phone number)
 
 ## Prompt Templates
 
@@ -53,11 +53,11 @@
 
 **Example**
 
-><em>User</em>: I will tell you the name of an animal. Please respond with the noise that animal makes. {{ANIMAL}}
+> <em>User</em>: I will tell you the name of an animal. Please respond with the noise that animal makes. {{ANIMAL}}
 >
-><em>Input{{ANIMAL}}</em>: Cow
+> <em>Input{{ANIMAL}}</em>: Cow
 >
-><em>Assistant</em>: Moo.
+> <em>Assistant</em>: Moo.
 
 <p>You can include as many variables as you need to within the prompt template. There is no specified limit. </p>
 
@@ -67,19 +67,19 @@
 
 **Example**
 
-><em>User</em>: Below is a list of items. Tell me the second item on the list.
+> <em>User</em>: Below is a list of items. Tell me the second item on the list.
 > - Each item is food-related.<br>
 > < food-items ><br>
 > {{FOOD-ITEMS}}<br>
 > < /food-items >
 >
-><em>Input{{FOOD-ITEMS}}</em>:
+> <em>Input{{FOOD-ITEMS}}</em>:
 > - Milk
 > - Eggs
 > - Bread
 > - Chicken
 >
-><em>Assistant</em>: The second item on the list is "Eggs".
+> <em>Assistant</em>: The second item on the list is "Eggs".
 
 ## Formatting AI Output
 
@@ -87,26 +87,26 @@
 
 **Example**
 
-><em>User</em>: Please write a haiku about {{ANIMAL}}. Put it in < haiku > XML tags.
+> <em>User</em>: Please write a haiku about {{ANIMAL}}. Put it in < haiku > XML tags.
 >
-><em>Input{{ANIMAL}}</em>: Cat
+> <em>Input{{ANIMAL}}</em>: Cat
 >
-><em>Assistant</em>: Here's a haiku about Cat:<br>
->< haiku ><br>
->Feline grace and poise,<br>
->Purring softly by the fire,<br>
->Mysterious cat.<br>
+> <em>Assistant</em>: Here's a haiku about Cat:<br>
+> < haiku ><br>
+> Feline grace and poise,<br>
+> Purring softly by the fire,<br>
+> Mysterious cat.<br>
 > < /haiku >
 
 <p>AI is also good at providing responses in a JSON format. To enforce JSON output, you can prefill the AI's response with the opening brackt, "{"</p>
 
 **Example**
 
-><em>User</em>: Please write a haiku about Cat. Use JSON format with the keys as "first_line", "second_line", and "third_line". Assistant: {
+> <em>User</em>: Please write a haiku about Cat. Use JSON format with the keys as "first_line", "second_line", and "third_line". Assistant: {
 >
-><em>Assistant</em>: "first_line": "Feline grace and poise",<br>
->"second_line": "Purring softly by my side",<br>
->"third_line": "Captivating cat."
+> <em>Assistant</em>: "first_line": "Feline grace and poise",<br>
+> "second_line": "Purring softly by my side",<br>
+> "third_line": "Captivating cat."
 
 ## Using Precognition (i.e., Thinking Out Loud)
 
@@ -114,36 +114,88 @@
 
 **Example (BAD)**
 
-><em>User</em>: Is this movie review sentiment positive or negative?
+> <em>User</em>: Is this movie review sentiment positive or negative?
 >
->"This movie blew my mind with its freshness and originality. In totally unrelated news, I have been living under a rock since the year 1900."
+> "This movie blew my mind with its freshness and originality. In totally unrelated news, I have been living under a rock since the year 1900."
 >
-><em>Assistant</em>: The sentiment of this movie review is positive. The review states that the movie "blew my mind with its freshness and originality", which indicates a very positive and enthusiastic reaction to the film.
+> <em>Assistant</em>: The sentiment of this movie review is positive. The review states that the movie "blew my mind with its freshness and originality", which indicates a very positive and enthusiastic reaction to the film.
 >
->The second part of the review about living under a rock since 1900 is likely meant as a humorous or self-deprecating remark, but it does not negate the overall positive sentiment expressed about the movie's qualities.
+> The second part of the review about living under a rock since 1900 is likely meant as a humorous or self-deprecating remark, but it does not negate the overall positive sentiment expressed about the movie's qualities.
 
 **Example (GOOD)**
 
-><em>System Prompt</em>: You are a savvy reader of movie reviews.
+> <em>System Prompt</em>: You are a savvy reader of movie reviews.
 >
-><em>User</em>: Is this movie review sentiment positive or negative? First, write the best arguments for each side in < positive-argument > and < negative-argument > XML tags, then answer.
+> <em>User</em>: Is this movie review sentiment positive or negative? First, write the best arguments for each side in < positive-argument > and < negative-argument > XML tags, then answer.
 >
->"This movie blew my mind with its freshness and originality. In totally unrelated news, I have been living under a rock since the year 1900."
+> "This movie blew my mind with its freshness and originality. In totally unrelated news, I have been living under a rock since the year 1900."
 >
-><em>Assistant</em>:<br>
+> <em>Assistant</em>:<br>
 >
 > < positive-argument >
 > - The review suggests the movie has a sense of freshness and originality, which can be seen as positive attributes.<br>
 > - The reviewer's statement about living under a rock since 1900 could be interprested as a humorous acknowledgment that the movie's concepts may not be as novel or groundbreaking as they first appeared, indicating an open-minded and self-aware perspective.<br>
 >
->< /positive-argument >
+> < /positive-argument >
 >
->< negative-argument >
+> < negative-argument >
 > - The reviewer's admission of living under a rock since 1900 implies a lack of awareness or exposure to recent trends and developments in the film industry, which could undermine the credibility of their assessment of the movie's "freshness and originality".<br>
 > - The sarcastic tone of the statement about living under a rock suggests the review may have found the movie to be unoriginal or derivative, rather than truly fresh and innovative.<br>
 >
->< /negative-arugment >
+> < /negative-arugment >
 >
->Based on the review, the sentiment appears to be more negative than positive. The reviewer's self-deprecating acknowledgment of their limited perspective and the potential sarcasm in their statement suggest that they may not have found the movie to be as fresh and original as they initially claimed.
+> Based on the review, the sentiment appears to be more negative than positive. The reviewer's self-deprecating acknowledgment of their limited perspective and the potential sarcasm in their statement suggest that they may not have found the movie to be as fresh and original as they initially claimed.
 
 ***NOTE***: You need to be careful about the order in which you provide instructions, which can influence an AI's responses. Typically, when presented with two options, an AI is more likely to choose the second of the two due to its training data from the web, which frequently frames the second of two options as the preferable one.
+
+## Providing Examples ('One-Shot' or 'Few-Shot' Prompts)
+
+<p>You can also use examples to guide the AI on the kind of responses you're looking for. This can help you to get the right answer, as well as provide guidance on the format you're looking for.</p>
+
+**Example (BAD)**
+
+> <em>User</em>: Will Santa bring me presents on Christmas?
+>
+> <em>Assistant</em>: Santa Claus is a fictional character. While he does bring presents to children at Christmas in the many stories about him, he is unlikely to bring you presents as he only exists in fiction.
+
+ **Example (GOOD)**
+
+> <em>User</em>: Please complete the conversation by writing the next line, speaking as "A".<br>
+> Q: Is the tooth fairy real?<br>
+> A: Of course, sweetie. Wrap up your tooth and put it under your pillow tonight. There might be something waiting for you in the morning.<br>
+> Q: Will Santa bring me presents on Christmas?<br>
+> <em>Assistant</em>: A: Yes, my dear. As long as you've been good this year, Santa will be sure to bring you presents on Christmas! Just make sure to leave out some milk and cookies for him on Christmas eve.
+
+## Preventing Hallucinations
+
+<p>Hallucinations, where an AI makes claims that are untrue or unjustified, can happen. There are many ways to prevent hallucincations, but two of the best ways are to:
+<ul>
+  <li>Give the AI the option to say it doesn't know the answer to a question.</li>
+  <li>Ask the AI to find and explain evidence before answering</li>
+</ul></p>
+
+**Example**
+
+> <em>User</em>: Who is the heaviest hippo of all time? Only answer if you know the answer with certainty.
+>
+> <em>Assistant</em>: I do not have definitive information about the heaviest hippo of all time. Hippo weights can vary significantly, and without access to comprehensive records, I cannot state with certainty who the heaviest hippo was. Hippo weights are not as well-documented as some other animals, so I do not want to provide an unverified claim.
+
+**Example**
+
+> <em>User</em>: < question > What was Matterport's subscriber base on the precise dates of May 31, 2020 < /question ><br>
+>
+> Please read the attached document. Then, in < scratchpad > tags, pull the most relevant quote from the document and consider whether it answers the question or whether it lacks sufficient detail. Then write a breif numerical answer in < answer > tags.<br>
+>
+> <em>Assistant</em>: < scratchpad ><br>
+> The document does not provide the precise subcriber base of Matterport on May 31, 2020. The closest relevant quote is:<br>
+>
+> "As of December 31, 2022, our subscriber base has grown approximately 39% to over 701,000 subscribers from 503,000 subscribers on December 31, 2021, with our digital services reaching more than 170 countries."<br>
+>
+> This quote indicates that Matterport had 503,000 subscribers as of December 31, 2021, but does not specify the subscriber base on May 31, 2020.<br>
+> < scratchpad ><br>
+>
+> < answer > The document does not provide the precise subscriber base of Matterport on May 31, 2020. < /answer >
+
+***NOTE***: You can also use <em>temperature</em> settings for AI's responses to avoid hallucinations. Temperature is the measure of answer creativity, a number between 0 and 1, with 1 being more unpredictable and less standardized, and 0 being the most consistent.
+
+## Tips for Building Complex Prompts from Scratch
