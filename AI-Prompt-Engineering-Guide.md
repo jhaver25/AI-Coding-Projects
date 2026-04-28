@@ -199,3 +199,4 @@
 ***NOTE***: You can also use <em>temperature</em> settings for AI's responses to avoid hallucinations. Temperature is the measure of answer creativity, a number between 0 and 1, with 1 being more unpredictable and less standardized, and 0 being the most consistent.
 
 ## Tips for Building Complex Prompts from Scratch
+
