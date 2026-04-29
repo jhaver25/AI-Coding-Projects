@@ -200,3 +200,64 @@
 
 ## Tips for Building Complex Prompts from Scratch
 
+**1. "User:" Formatting** - Open all AI API messages with "User:"
+<ul>
+  <li><em>Odering</em> - All prompts should start indicating the User is speaking</li>
+  <li><em>Example</em> - "User: Lorem Ipsum"</li>
+</ul>
+
+**2. Task Context** - Give the AI context about the role it should take or what goals and overarching tasks you want it to accomplish via the prompt.
+<ul>
+  <li><em>Ordering</em> - It's best to put task context early in the body of the prompt.</li>
+  <li><em>Example</em> - "You will be acting as an AI career coach named Joe, created by the company AdAstra Careers. Your goal is to give career advice to users. You will be replying to users who are on the AdAstra site and who will be confused if you don't respond in the character of Joe.</li>
+</ul>
+
+**3. Tone Context** - If it's important to the interaction, tell the AI what tone it should use in its responses
+<ul>
+  <li><em>Ordering</em> - It's best to put tone context early in the body of the prompt, if it's required. </li>
+  <li><em>Example</em> - "You should maintain a friendly customer service tone." </li>
+</ul>
+
+**4. Detailed Task Description and Rules** - Expand on the specific tasks you want the AI to do, as well as any rules that the AI may have to follow. This is also where you can give the AI an "out" if it doesn't have an answer or doesn't know the solution.
+<ul>
+  <li><em>Ordering</em> - This section will serve as the main body of your request to the AI. </li>
+  <li><em>Example</em> - "Here are some important rules for this interaction: 1.) Always stay in character as Joe, an AI from AdAstra Careers. 2.) If you are unsure of how to respon, say 'Sorry, I didn't understand that. Could you rephrase your question?' 3.) If someone asks something irrelevant, say 'Sorry, I am Joe and I give career advice. Do you have a career question I could help you with?' </li>
+</ul>
+
+**5. Provide Examples** - Provide the AI with at least one example of an ideal response that it can emulate. Encase the example in XML tags (< example > < /example >). You can also provide multiple examples, but should provide additional context on each example and how it would be used. Enclose each example in its own set of XML tags.<br>
+<br>
+Examples are probably the most effective tool for getting an AI to behave as desired. Make sure to provide examples of common edge cases as well. If your prompt uses a scratchpad, it's effective to give examples of how the scratchpad should look. Generally, the more examples you provide the better the prompt and response will be.
+<ul>
+  <li><em>Ordering</em> - Examples should typically be provided toward the end of the prompt. </li>
+  <li><em>Example</em> - "Here is an example of how to respond in a standard interaction: < example > Customer: Hi, how were you created and what do you do? Joe: Hello! My name is Joe, and I was created by AdAstra Careers to give career advice. What can I help you with today? < /example >" </li>
+</ul>
+
+**6. Input Data to Process** - If there is data that the AI needs to process as part of the prompt, include it with the relevant XML tags. You can include multiple pieces of data, but be sure to enclose each within its own set of XML tags.
+<ul>
+  <li><em>Ordering</em> - Ordering is flexible, depending on the needs of the prompt. Additional data may not be necessary for every prompt. </li>
+  <li><em>Example</em> - "Here is the conversational history (between the user and you) prior to the question. It could be empty if there is no history. < history > {{HISTORY}} < /history >. Here's the user's question: < question > {{QUESTION}} < /question >. </li>
+</ul>
+
+**7. Immediate Task Desription** - Remind the AI or tell the AI exactly what it's expected to immediately do to fulfill the prompt's request. This is also where you would input additional variables like the user's question. 
+<ul>
+  <li><em>Ordering</em> - It generally doesn't hurt to reiterate the immediate task to the AI at both the beginning and end of the prompt. Either way, it's best to provide the immediate task description at the end, especially if it's a long or complex prompt.</li>
+  <li><em>Example</em> - "Given all of the information provided, how do you respond to the user's question? </li>
+</ul>
+
+**8. Enable Precognition (Thinking in Steps)** - For tasks with multiple steps, it's good to tell the AI the exact steps, in order, for how it should approach the request before providing an answer. Sometimes, you might even say "Before you give an answer..." just to emphasize the importance of the steps to the AI. 
+<ul>
+  <li><em>Ordering</em> - It's best to include these instructions toward the end of a long prompt and right after the final immediate task request/description. May not be necessary for all prompts. </li>
+  <li><em>Example</em> - "Think about your answer before you respond, by considering the following: 1.) your chat history with the user 2.) the user's account details (if available) 3.) the date of your last interaction with the user." </li>
+</ul>
+
+**9. Output Formatting** - If there is a specific way you want the AI's response to be formatted, clearly explain what that format is. 
+<ul>
+  <li><em>Ordering</em> - Place this element toward the end of the prompt, if required. </li>
+  <li><em>Example</em> - "Put your response in < repsonse > < /response > tags." </li>
+</ul>
+
+**10. Prefilling the AI's Response** - You can start the AI's answer yourself with some prefilled words to steer the AI's behavior or response. If you want to pre-fill an AI's response, you MUST include "Assistant:" (or the relevant identifier for the AI) and it MUST be as a new line. Otherwise, it will be counted as part of the "User:" turn.
+<ul>
+  <li><em>Ordering</em> - This element needs to be placed at the very end of the prompt (the final element). </li>
+  <li><em>Example</em> - "Assistant: [Joe] < response > "</li>
+</ul>
