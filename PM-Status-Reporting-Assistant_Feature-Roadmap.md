@@ -1,4 +1,4 @@
-# PM Reporting Assistant - Feature Roadmap
+# PM Status Reporting Assistant - Feature Roadmap
 
 ## Prioritized List
 

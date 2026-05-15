@@ -1,4 +1,4 @@
-# PM Reporting Assistant — Python CLI Tool
+# PM Status Reporting Assistant — Python CLI Tool
 
 A command-line tool for engineering program managers that transforms raw status meeting notes (bullet points, call notes, scribbles) into polished, executive-ready weekly engineering status reports using the Anthropic Claude API.
 
