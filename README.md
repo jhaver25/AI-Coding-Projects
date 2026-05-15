@@ -50,6 +50,8 @@ The tool prompts you for each team name, then for that team's bullet points. Typ
 python3 status_report.py -i example_notes.md
 ```
 
+Only `.md` and `.txt` files are supported. A `notes_template.md` starter file is included in the project directory — copy it, fill in your teams, and pass it with `-i`.
+
 The input file uses `## Team Name` as section headers, one per team:
 
 ```markdown
@@ -87,6 +89,7 @@ python3 status_report.py -i notes.md -o reports/week-42.md
 status_report.py        # Main CLI script
 requirements.txt        # Python dependencies (anthropic)
 example_notes.md        # Sample multi-team input file
+notes_template.md       # Starter template for multi-team notes input
 ```
 
 ---
@@ -126,10 +129,11 @@ Formats the week range as a human-readable string for use in the report heading 
 Reads a `.md` or `.txt` file and returns a `{team_name: notes_text}` dictionary.
 
 **Parsing logic:**
-- If the file contains any `## ` section headers, it splits the file on those headers, using each header text as the team name and collecting the lines beneath it as that team's notes.
-- If there are no `## ` headers, the entire file is treated as one team's notes under the key `"General"`.
+- If any line **begins with** `## `, the file is parsed as multi-team format — each such header becomes a team name, and the lines beneath it are collected as that team's notes. Headers appearing mid-line (e.g. in a bullet point) do not trigger multi-team parsing.
+- If no lines begin with `## `, the entire file is treated as one team's notes under the key `"General"`.
+- Whitespace-only team sections are skipped with a warning rather than passed to the API.
 
-Exits with an error message if the file does not exist.
+Exits with an error message if the file does not exist, is empty or contains only whitespace, or uses an unsupported file type. Only `.md` and `.txt` files are accepted.
 
 ---
 
@@ -156,6 +160,8 @@ Constructs the `system` parameter as a list with a single content block — the 
 **Non-streaming path (`--no-stream`):** Uses `client.messages.create()` for a single blocking call, prints the full response, then returns the text.
 
 After either path, calls `_print_cache_stats()` to display token usage.
+
+API errors are caught and surfaced as clear, actionable messages rather than raw Python exceptions. Handled cases include authentication failures (bad API key), rate limits, connection issues, and requests rejected due to oversized input.
 
 ---
 
