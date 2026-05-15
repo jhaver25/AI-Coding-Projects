@@ -134,16 +134,29 @@ def read_notes_from_file(filepath: str) -> dict[str, str]:
         print(f"Error: File not found: {filepath}", file=sys.stderr)
         sys.exit(1)
 
+    supported_extensions = {".md", ".txt"}
+    if path.suffix.lower() not in supported_extensions:
+        print(f"Error: Unsupported file type '{path.suffix}'. Supported formats: .md, .txt", file=sys.stderr)
+        print("Tip: Copy your notes into a .txt or .md file and try again.", file=sys.stderr)
+        sys.exit(1)
+
     content = path.read_text(encoding="utf-8").strip()
+    if not content:
+        print(f"Error: File is empty or contains only whitespace: {filepath}", file=sys.stderr)
+        sys.exit(1)
+
     teams: dict[str, str] = {}
 
-    if "## " in content:
+    if any(line.startswith("## ") for line in content.splitlines()):
         current_team: str | None = None
         current_lines: list[str] = []
         for line in content.splitlines():
             if line.startswith("## "):
-                if current_team and current_lines:
-                    teams[current_team] = "\n".join(current_lines).strip()
+                notes = "\n".join(current_lines).strip()
+                if current_team and notes:
+                    teams[current_team] = notes
+                elif current_team:
+                    print(f"  ! No notes found for '{current_team}' — skipping.", file=sys.stderr)
                 current_team = line[3:].strip()
                 current_lines = []
             else:
@@ -236,34 +249,50 @@ def generate_report(
     print("\n⏳ Generating report...\n")
     print("─" * 60)
 
-    if use_stream:
-        report_text = ""
-        with client.messages.stream(
-            model="claude-sonnet-4-6",
-            max_tokens=4096,
-            system=system,
-            messages=[{"role": "user", "content": user_message}],
-        ) as stream:
-            for chunk in stream.text_stream:
-                print(chunk, end="", flush=True)
-                report_text += chunk
-            final = stream.get_final_message()
+    try:
+        if use_stream:
+            report_text = ""
+            with client.messages.stream(
+                model="claude-sonnet-4-6",
+                max_tokens=4096,
+                system=system,
+                messages=[{"role": "user", "content": user_message}],
+            ) as stream:
+                for chunk in stream.text_stream:
+                    print(chunk, end="", flush=True)
+                    report_text += chunk
+                final = stream.get_final_message()
 
-        print("\n" + "─" * 60)
-        _print_cache_stats(final.usage)
-        return report_text
-    else:
-        response = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=4096,
-            system=system,
-            messages=[{"role": "user", "content": user_message}],
-        )
-        text = next(b.text for b in response.content if b.type == "text")
-        print(text)
-        print("─" * 60)
-        _print_cache_stats(response.usage)
-        return text
+            print("\n" + "─" * 60)
+            _print_cache_stats(final.usage)
+            return report_text
+        else:
+            response = client.messages.create(
+                model="claude-sonnet-4-6",
+                max_tokens=4096,
+                system=system,
+                messages=[{"role": "user", "content": user_message}],
+            )
+            text = next(b.text for b in response.content if b.type == "text")
+            print(text)
+            print("─" * 60)
+            _print_cache_stats(response.usage)
+            return text
+    except anthropic.AuthenticationError:
+        print("Error: Invalid API key. Check your ANTHROPIC_API_KEY.", file=sys.stderr)
+        sys.exit(1)
+    except anthropic.RateLimitError:
+        print("Error: Rate limit reached. Wait a moment and try again.", file=sys.stderr)
+        sys.exit(1)
+    except anthropic.APIConnectionError:
+        print("Error: Could not connect to the Anthropic API. Check your internet connection.", file=sys.stderr)
+        sys.exit(1)
+    except anthropic.BadRequestError as e:
+        print(f"Error: Request rejected — your notes may be too long to process. ({e})", file=sys.stderr)
+        sys.exit(1)
+    except anthropic.APIStatusError as e:
+        print(f"Error: API returned an unexpected error ({e.status_code}): {e.message}", file=sys.stderr)
+        sys.exit(1)
 
 
 def _print_cache_stats(usage: object) -> None:
