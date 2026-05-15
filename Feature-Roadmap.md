@@ -2,7 +2,7 @@
 
 ## Prioritized List
 
-1. Handling .txt as input (instead of just .md)
+1. Handling .txt as input for multi-team notes (instead of just .md)
 2. JIRA API Integration (for retrieiving specific ticket #'s and descriptions)
 3. Handling Word document file types as input (e.g., .doc, .docx)
 5. Export to .ppt
