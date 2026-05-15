@@ -39,7 +39,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 ### Interactive mode (no file needed)
 
 ```bash
-python3 status_report.py
+python3 pm-status-report-assistant.py
 ```
 
 The tool prompts you for each team name, then for that team's bullet points. Type `done` when you've entered all teams.
@@ -47,10 +47,10 @@ The tool prompts you for each team name, then for that team's bullet points. Typ
 ### File-based mode
 
 ```bash
-python3 status_report.py -i example_notes.md
+python3 pm-status-report-assistant.py -i Meeting-Notes_Demo-Text.md
 ```
 
-Only `.md` and `.txt` files are supported. A `notes_template.md` starter file is included in the project directory — copy it, fill in your teams, and pass it with `-i`.
+Only `.md` and `.txt` files are supported. A `Meeting-Notes_Template.md` starter file is included in the project directory — copy it, fill in your teams, and pass it with `-i`.
 
 The input file uses `## Team Name` as section headers, one per team:
 
@@ -69,7 +69,7 @@ A file with no `##` headers is treated as a single team's notes under a "General
 ### Saving output to a file
 
 ```bash
-python3 status_report.py -i notes.md -o reports/week-42.md
+python3 pm-status-report-assistant.py -i notes.md -o reports/week-42.md
 ```
 
 ### Other flags
@@ -86,10 +86,14 @@ python3 status_report.py -i notes.md -o reports/week-42.md
 ## File Structure
 
 ```
-status_report.py        # Main CLI script
-requirements.txt        # Python dependencies (anthropic)
-example_notes.md        # Sample multi-team input file
-notes_template.md       # Starter template for multi-team notes input
+pm-status-report-assistant.py   # Main CLI script
+requirements.txt                # Python dependencies (anthropic)
+Meeting-Notes_Template.md       # Starter template for multi-team notes input
+Meeting-Notes_Demo-Text.md      # Sample multi-team input file
+Status-Report_Example-1.md      # Example generated report output
+AI-Prompt-Engineering-Guide.md  # Prompt engineering reference for the system prompt
+Claude-Code-Review-Notes.md     # Code review notes and change log
+Feature-Roadmap.md              # Planned improvements and future feature ideas
 ```
 
 ---

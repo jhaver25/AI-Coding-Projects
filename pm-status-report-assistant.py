@@ -319,13 +319,13 @@ def save_report(report: str, output_path: str, week_header: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        prog="status_report",
+        prog="pm-status-report-assistant",
         description="Generate weekly engineering status reports from meeting notes",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 examples:
   Interactive mode (type notes at the prompts):
-    python status_report.py
+    python pm-status-report-assistant.py
 
   From a file (single team):
     python status_report.py -i notes.txt
