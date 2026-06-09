@@ -4,6 +4,12 @@ A command-line tool for engineering program managers that transforms raw status 
 
 ---
 
+## Demo Recording
+
+Accessible via Loom: https://www.loom.com/share/b510dde0365c4c4db6442447d09b7c1c
+
+---
+
 ## Overview
 
 After weekly project status calls, a PM typically has a pile of raw bullet points — team accomplishments, blockers, risks, dependencies — and needs to turn them into a structured report that engineering VPs and C-suite can read and act on in minutes. This tool automates that transformation.
